@@ -18,7 +18,7 @@ mix docs              # Generate ExDoc documentation
 
 This is a thin Elixir client library for the [TMDb API](https://developer.themoviedb.org/). It wraps HTTPoison with automatic bearer token auth.
 
-**`TmdbElixir.Base`** — The HTTP foundation. Uses `HTTPoison.Base` callbacks (`process_url/1`, `process_request_headers/1`) to prepend `https://api.themoviedb.org/3/` to all paths and inject the `Authorization: Bearer <token>` header. The token comes from `Application.fetch_env!(:tmdb_elixir, :auth_token)`, which is populated from the `TMDB_AUTH_TOKEN` environment variable via `config/config.exs`.
+**`TmdbElixir.Base`** — The HTTP foundation. Uses `HTTPoison.Base` callbacks (`process_url/1`, `process_request_headers/1`) to prepend `https://api.themoviedb.org/3/` to all paths and inject the `Authorization: Bearer <token>` header. The token comes from `Application.fetch_env!(:tmdb_elixir, :auth_token)`, which is populated from the `TMDB_READ_ACCESS_TOKEN` environment variable via `config/config.exs`.
 
 **Resource modules** (`Movies`, `People`, `Search`, `Configuration`) — Each wraps one TMDb resource. All functions call `TmdbElixir.Base.get!/2` with a path and URL-encoded query params. Pattern is consistent across modules:
 
@@ -32,10 +32,10 @@ end
 
 ```elixir
 # config/config.exs
-config :tmdb_elixir_req, auth_token: System.get_env("TMDB_AUTH_TOKEN")
+config :tmdb_elixir_req, auth_token: System.get_env("TMDB_READ_ACCESS_TOKEN")
 ```
 
-Set `TMDB_AUTH_TOKEN` in your environment before running the app.
+Set `TMDB_READ_ACCESS_TOKEN` in your environment before using the library.
 
 ## Adding a New Endpoint
 

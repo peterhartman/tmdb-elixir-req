@@ -18,6 +18,9 @@ end
 
 ## Usage
 
+### Access token
+Set `TMDB_READ_ACCESS_TOKEN` in your environment before using the library.
+
 ### Searching for movies or people:
 
 ```elixir
