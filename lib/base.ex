@@ -5,7 +5,10 @@ defmodule TmdbElixir.Base do
 
   def process_response_body(body), do: Poison.decode!(body)
 
-  def process_request_url(endpoint), do: "https://api.themoviedb.org/3/#{endpoint}"
+  def process_request_url(endpoint) do
+    base_url = Application.get_env(:tmdb_elixir_req, :base_url, "https://api.themoviedb.org/3/")
+    "#{base_url}#{endpoint}"
+  end
 
   def get!(url, headers \\ [], options \\ []),
     do: request!(:get, url, "", headers ++ auth_headers(), options)
