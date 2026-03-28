@@ -2,10 +2,10 @@ defmodule TmdbElixirReq.Base do
   @moduledoc false
 
   @doc """
-  Get data from the TMDb API using a full URL.
+  Get data from the TMDb API using a URL.
   ## Examples
 
-      iex> TmdbElixirReq.Base.get!("https://api.themoviedb.org/3/tv/1396")["name"]
+      iex> TmdbElixirReq.Base.get!("/tv/1396").body["name"]
       "Breaking Bad"
   """
   def get!(url, headers \\ [], options \\ []) do

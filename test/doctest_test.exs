@@ -141,4 +141,5 @@ defmodule TmdbElixirReq.DoctestTest do
   doctest TmdbElixirReq.Configuration
   doctest TmdbElixirReq.TV
   doctest TmdbElixirReq.Trending
+  doctest TmdbElixirReq.Base
 end
