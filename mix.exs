@@ -24,7 +24,6 @@ defmodule TmdbElixirReq.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:httpoison, "~> 2.0"},
       {:usage_rules, "~> 1.0", only: [:dev]},
       {:igniter, "~> 0.6", only: [:dev, :test]},
       {:req, "~> 0.5.0"},
