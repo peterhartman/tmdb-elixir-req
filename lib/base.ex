@@ -3,7 +3,7 @@ defmodule TmdbElixirReq.Base do
 
   use HTTPoison.Base
 
-  def process_response_body(body), do: Poison.decode!(body)
+  def process_response_body(body), do: Jason.decode!(body)
 
   def process_request_url(endpoint) do
     base_url = Application.get_env(:tmdb_elixir_req, :base_url, "https://api.themoviedb.org/3/")

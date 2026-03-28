@@ -25,7 +25,6 @@ defmodule TmdbElixirReq.MixProject do
   defp deps do
     [
       {:httpoison, "~> 2.0"},
-      {:poison, "~> 6.0"},
       {:usage_rules, "~> 1.0", only: [:dev]},
       {:igniter, "~> 0.6", only: [:dev, :test]},
       {:req, "~> 0.5.0"},
