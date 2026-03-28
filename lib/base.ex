@@ -1,4 +1,4 @@
-defmodule TmdbElixir.Base do
+defmodule TmdbElixirReq.Base do
   @moduledoc false
 
   use HTTPoison.Base

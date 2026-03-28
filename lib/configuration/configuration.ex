@@ -1,9 +1,9 @@
-defmodule TmdbElixir.Configuration do
+defmodule TmdbElixirReq.Configuration do
   @moduledoc """
   Used for making calls related to configuration details.
   """
 
-  alias TmdbElixir.Base
+  alias TmdbElixirReq.Base
 
   @doc """
   Get API configuration details.
@@ -14,13 +14,8 @@ defmodule TmdbElixir.Configuration do
 
   ## Examples
 
-      iex> TmdbElixir.Configuration.configuration()
-      %{
-        "images" => %{
-          ...
-        },
-        ...
-      }
+      iex> TmdbElixirReq.Configuration.configuration()["images"]["base_url"]
+      "http://image.tmdb.org/t/p/"
   """
   def configuration do
     Base.get!("configuration").body

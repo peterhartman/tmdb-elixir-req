@@ -1,9 +1,9 @@
-defmodule TmdbElixir.Movies do
+defmodule TmdbElixirReq.Movies do
   @moduledoc """
   Used for making calls related to movies.
   """
 
-  alias TmdbElixir.Base
+  alias TmdbElixirReq.Base
 
   @doc """
   Get the top level details of a movie by ID.
@@ -14,11 +14,8 @@ defmodule TmdbElixir.Movies do
 
   ## Examples
 
-      iex> TmdbElixir.Movies.find(11836)
-      %{
-        "title" => "The SpongeBob SquarePants Movie",
-        ...
-      }
+      iex> TmdbElixirReq.Movies.find(11836)["title"]
+      "The SpongeBob SquarePants Movie"
   """
   def find(id, params \\ %{}) do
     Base.get!("movie/#{id}?#{URI.encode_query(params)}").body
@@ -33,15 +30,8 @@ defmodule TmdbElixir.Movies do
 
   ## Examples
 
-      iex> TmdbElixir.Movies.popular()
-      %{
-        "page" => 1,
-        "results" => [
-          ...
-        ],,
-        "total_pages" => 10,
-        "total_results" => 250
-      }
+      iex> TmdbElixirReq.Movies.popular()["page"]
+      1
   """
   @doc since: "0.1.0"
   def popular(params \\ %{}) do

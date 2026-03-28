@@ -1,4 +1,4 @@
-defmodule TmdbElixir.MoviesTest do
+defmodule TmdbElixirReq.MoviesTest do
   use ExUnit.Case, async: false
 
   setup do
@@ -14,7 +14,7 @@ defmodule TmdbElixir.MoviesTest do
         Plug.Conn.resp(conn, 200, ~s({"id": 11836, "title": "The SpongeBob SquarePants Movie"}))
       end)
 
-      result = TmdbElixir.Movies.find(11836)
+      result = TmdbElixirReq.Movies.find(11836)
 
       assert result["id"] == 11836
       assert result["title"] == "The SpongeBob SquarePants Movie"
@@ -27,7 +27,7 @@ defmodule TmdbElixir.MoviesTest do
         Plug.Conn.resp(conn, 200, ~s({"id": 11836}))
       end)
 
-      TmdbElixir.Movies.find(11836, %{language: "en-US"})
+      TmdbElixirReq.Movies.find(11836, %{language: "en-US"})
     end
 
     test "sends the Authorization bearer token header", %{bypass: bypass} do
@@ -36,7 +36,7 @@ defmodule TmdbElixir.MoviesTest do
         Plug.Conn.resp(conn, 200, ~s({}))
       end)
 
-      TmdbElixir.Movies.find(11836)
+      TmdbElixirReq.Movies.find(11836)
     end
   end
 
@@ -50,7 +50,7 @@ defmodule TmdbElixir.MoviesTest do
         )
       end)
 
-      result = TmdbElixir.Movies.popular()
+      result = TmdbElixirReq.Movies.popular()
 
       assert result["page"] == 1
       assert result["total_pages"] == 5
@@ -61,10 +61,15 @@ defmodule TmdbElixir.MoviesTest do
       Bypass.expect_once(bypass, "GET", "/movie/popular", fn conn ->
         params = URI.decode_query(conn.query_string)
         assert params["page"] == "2"
-        Plug.Conn.resp(conn, 200, ~s({"page": 2, "results": [], "total_pages": 5, "total_results": 100}))
+
+        Plug.Conn.resp(
+          conn,
+          200,
+          ~s({"page": 2, "results": [], "total_pages": 5, "total_results": 100})
+        )
       end)
 
-      TmdbElixir.Movies.popular(%{page: 2})
+      TmdbElixirReq.Movies.popular(%{page: 2})
     end
   end
 end

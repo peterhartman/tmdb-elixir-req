@@ -1,4 +1,4 @@
-defmodule TmdbElixir.PeopleTest do
+defmodule TmdbElixirReq.PeopleTest do
   use ExUnit.Case, async: false
 
   setup do
@@ -14,7 +14,7 @@ defmodule TmdbElixir.PeopleTest do
         Plug.Conn.resp(conn, 200, ~s({"id": 287, "name": "Brad Pitt"}))
       end)
 
-      result = TmdbElixir.People.find(287)
+      result = TmdbElixirReq.People.find(287)
 
       assert result["id"] == 287
       assert result["name"] == "Brad Pitt"
@@ -27,7 +27,7 @@ defmodule TmdbElixir.PeopleTest do
         Plug.Conn.resp(conn, 200, ~s({"id": 287}))
       end)
 
-      TmdbElixir.People.find(287, %{language: "en-US"})
+      TmdbElixirReq.People.find(287, %{language: "en-US"})
     end
 
     test "sends the Authorization bearer token header", %{bypass: bypass} do
@@ -36,7 +36,7 @@ defmodule TmdbElixir.PeopleTest do
         Plug.Conn.resp(conn, 200, ~s({}))
       end)
 
-      TmdbElixir.People.find(287)
+      TmdbElixirReq.People.find(287)
     end
   end
 end

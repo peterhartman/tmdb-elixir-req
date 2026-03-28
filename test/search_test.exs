@@ -1,4 +1,4 @@
-defmodule TmdbElixir.SearchTest do
+defmodule TmdbElixirReq.SearchTest do
   use ExUnit.Case, async: false
 
   setup do
@@ -13,10 +13,15 @@ defmodule TmdbElixir.SearchTest do
       Bypass.expect_once(bypass, "GET", "/search/movie", fn conn ->
         params = URI.decode_query(conn.query_string)
         assert params["query"] == "spongebob"
-        Plug.Conn.resp(conn, 200, ~s({"page": 1, "results": [], "total_pages": 1, "total_results": 0}))
+
+        Plug.Conn.resp(
+          conn,
+          200,
+          ~s({"page": 1, "results": [], "total_pages": 1, "total_results": 0})
+        )
       end)
 
-      result = TmdbElixir.Search.movies("spongebob")
+      result = TmdbElixirReq.Search.movies("spongebob")
 
       assert result["page"] == 1
     end
@@ -26,10 +31,15 @@ defmodule TmdbElixir.SearchTest do
         params = URI.decode_query(conn.query_string)
         assert params["query"] == "spongebob"
         assert params["page"] == "2"
-        Plug.Conn.resp(conn, 200, ~s({"page": 2, "results": [], "total_pages": 1, "total_results": 0}))
+
+        Plug.Conn.resp(
+          conn,
+          200,
+          ~s({"page": 2, "results": [], "total_pages": 1, "total_results": 0})
+        )
       end)
 
-      TmdbElixir.Search.movies("spongebob", %{page: 2})
+      TmdbElixirReq.Search.movies("spongebob", %{page: 2})
     end
   end
 
@@ -38,10 +48,15 @@ defmodule TmdbElixir.SearchTest do
       Bypass.expect_once(bypass, "GET", "/search/person", fn conn ->
         params = URI.decode_query(conn.query_string)
         assert params["query"] == "brad pitt"
-        Plug.Conn.resp(conn, 200, ~s({"page": 1, "results": [], "total_pages": 1, "total_results": 0}))
+
+        Plug.Conn.resp(
+          conn,
+          200,
+          ~s({"page": 1, "results": [], "total_pages": 1, "total_results": 0})
+        )
       end)
 
-      result = TmdbElixir.Search.people("brad pitt")
+      result = TmdbElixirReq.Search.people("brad pitt")
 
       assert result["page"] == 1
     end
@@ -51,10 +66,15 @@ defmodule TmdbElixir.SearchTest do
         params = URI.decode_query(conn.query_string)
         assert params["query"] == "brad pitt"
         assert params["language"] == "en-US"
-        Plug.Conn.resp(conn, 200, ~s({"page": 1, "results": [], "total_pages": 1, "total_results": 0}))
+
+        Plug.Conn.resp(
+          conn,
+          200,
+          ~s({"page": 1, "results": [], "total_pages": 1, "total_results": 0})
+        )
       end)
 
-      TmdbElixir.Search.people("brad pitt", %{language: "en-US"})
+      TmdbElixirReq.Search.people("brad pitt", %{language: "en-US"})
     end
   end
 end

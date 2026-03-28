@@ -1,9 +1,9 @@
-defmodule TmdbElixir.Search do
+defmodule TmdbElixirReq.Search do
   @moduledoc """
   Used for making calls to search within TMDb.
   """
 
-  alias TmdbElixir.Base
+  alias TmdbElixirReq.Base
 
   @doc """
   Search for movies by their original, translated and alternative titles.
@@ -14,19 +14,8 @@ defmodule TmdbElixir.Search do
 
   ## Examples
 
-      iex> TmdbElixir.Search.movies("spongebob")
-      %{
-        "page" => 1,
-        "results" => [
-          %{
-            "title" => "The SpongeBob SquarePants Movie",
-            ...
-          },
-          ...
-        ],,
-        "total_pages" => 10,
-        "total_results" => 250
-      }
+      iex> TmdbElixirReq.Search.movies("spongebob")["page"]
+      1
   """
   def movies(query, params \\ %{}) do
     search("movie", query, params)
@@ -41,19 +30,8 @@ defmodule TmdbElixir.Search do
 
   ## Examples
 
-      iex> TmdbElixir.Search.people("brad pitt")
-      %{
-        "page" => 1,
-        "results" => [
-          %{
-            "name" => "Brad Pitt",
-            ...
-          },
-          ...
-        ],,
-        "total_pages" => 10,
-        "total_results" => 250
-      }
+      iex> TmdbElixirReq.Search.people("brad pitt")["page"]
+      1
   """
   def people(query, params \\ %{}) do
     search("person", query, params)

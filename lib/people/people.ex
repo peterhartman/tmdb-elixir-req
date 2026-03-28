@@ -1,9 +1,9 @@
-defmodule TmdbElixir.People do
+defmodule TmdbElixirReq.People do
   @moduledoc """
   Used for making calls related to people (actors and crew members).
   """
 
-  alias TmdbElixir.Base
+  alias TmdbElixirReq.Base
 
   @doc """
   Get the top level details of a person by ID.
@@ -14,11 +14,8 @@ defmodule TmdbElixir.People do
 
   ## Examples
 
-      iex> TmdbElixir.People.find(287)
-      %{
-        "name" => "Brad Pitt",
-        ...
-      }
+      iex> TmdbElixirReq.People.find(287)["name"]
+      "Brad Pitt"
   """
   def find(id, params \\ %{}) do
     Base.get!("person/#{id}?#{URI.encode_query(params)}").body

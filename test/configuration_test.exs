@@ -1,4 +1,4 @@
-defmodule TmdbElixir.ConfigurationTest do
+defmodule TmdbElixirReq.ConfigurationTest do
   use ExUnit.Case, async: false
 
   setup do
@@ -14,7 +14,7 @@ defmodule TmdbElixir.ConfigurationTest do
         Plug.Conn.resp(conn, 200, ~s({"images": {"base_url": "http://image.tmdb.org/t/p/"}}))
       end)
 
-      result = TmdbElixir.Configuration.configuration()
+      result = TmdbElixirReq.Configuration.configuration()
 
       assert get_in(result, ["images", "base_url"]) == "http://image.tmdb.org/t/p/"
     end
@@ -25,7 +25,7 @@ defmodule TmdbElixir.ConfigurationTest do
         Plug.Conn.resp(conn, 200, ~s({}))
       end)
 
-      TmdbElixir.Configuration.configuration()
+      TmdbElixirReq.Configuration.configuration()
     end
   end
 end
