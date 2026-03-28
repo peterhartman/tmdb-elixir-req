@@ -1,6 +1,6 @@
-# TMDb Elixir
+# TMDb Elixir Req
 
-An Elixir library for the TMDb API based on `tmdb_elixir`
+An Elixir library for the TMDb API based on `tmdb_elixir` which uses Req instead of HTTPoison
 
 [Docs]
 
@@ -19,7 +19,11 @@ end
 ## Usage
 
 ### Access token
-Set `TMDB_READ_ACCESS_TOKEN` in your environment before using the library.
+Set `auth_token` in your `config.exs`
+```
+config :tmdb_elixir_req,
+  auth_token: System.get_env("TMDB_READ_ACCESS_TOKEN")
+```
 
 ### Searching for movies or people:
 
