@@ -1,17 +1,17 @@
 # TMDb Elixir
 
-An Elixir library for the TMDb API
+An Elixir library for the TMDb API based on `tmdb_elixir`
 
 [Docs]
 
 ## Installation
 
-Add `tmdb_elixir` to your list of dependencies in `mix.exs`:
+Add `tmdb_elixir_req` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
   [
-    {:tmdb_elixir, "~> 1.1.0"}
+    {:tmdb_elixir_req, "~> 0.1.0"}
   ]
 end
 ```
@@ -21,15 +21,15 @@ end
 ### Searching for movies or people:
 
 ```elixir
-TmdbElixir.Search.movies("spongebob")
+TmdbElixirReq.Search.movies("spongebob")
 
-TmdbElixir.Search.people("brad pitt")
+TmdbElixirReq.Search.people("brad pitt")
 ```
 
 ### Finding by id:
 
 ```elixir
-TmdbElixir.Movies.find(11836)
+TmdbElixirReq.Movies.find(11836)
 
-TmdbElixir.People.find(287)
+TmdbElixirReq.People.find(287)
 ```
