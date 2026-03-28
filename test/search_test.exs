@@ -77,4 +77,74 @@ defmodule TmdbElixirReq.SearchTest do
       TmdbElixirReq.Search.people("brad pitt", %{language: "en-US"})
     end
   end
+
+  describe "tv/2" do
+    test "requests the correct path with query param", %{bypass: bypass} do
+      Bypass.expect_once(bypass, "GET", "/search/tv", fn conn ->
+        params = URI.decode_query(conn.query_string)
+        assert params["query"] == "breaking bad"
+
+        Plug.Conn.resp(
+          conn,
+          200,
+          ~s({"page": 1, "results": [], "total_pages": 1, "total_results": 0})
+        )
+      end)
+
+      result = TmdbElixirReq.Search.tv("breaking bad")
+
+      assert result["page"] == 1
+    end
+
+    test "merges additional params with the query", %{bypass: bypass} do
+      Bypass.expect_once(bypass, "GET", "/search/tv", fn conn ->
+        params = URI.decode_query(conn.query_string)
+        assert params["query"] == "breaking bad"
+        assert params["page"] == "2"
+
+        Plug.Conn.resp(
+          conn,
+          200,
+          ~s({"page": 2, "results": [], "total_pages": 1, "total_results": 0})
+        )
+      end)
+
+      TmdbElixirReq.Search.tv("breaking bad", %{page: 2})
+    end
+  end
+
+  describe "multi/2" do
+    test "requests the correct path with query param", %{bypass: bypass} do
+      Bypass.expect_once(bypass, "GET", "/search/multi", fn conn ->
+        params = URI.decode_query(conn.query_string)
+        assert params["query"] == "spongebob"
+
+        Plug.Conn.resp(
+          conn,
+          200,
+          ~s({"page": 1, "results": [], "total_pages": 1, "total_results": 0})
+        )
+      end)
+
+      result = TmdbElixirReq.Search.multi("spongebob")
+
+      assert result["page"] == 1
+    end
+
+    test "merges additional params with the query", %{bypass: bypass} do
+      Bypass.expect_once(bypass, "GET", "/search/multi", fn conn ->
+        params = URI.decode_query(conn.query_string)
+        assert params["query"] == "spongebob"
+        assert params["language"] == "en-US"
+
+        Plug.Conn.resp(
+          conn,
+          200,
+          ~s({"page": 1, "results": [], "total_pages": 1, "total_results": 0})
+        )
+      end)
+
+      TmdbElixirReq.Search.multi("spongebob", %{language: "en-US"})
+    end
+  end
 end
